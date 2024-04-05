@@ -3,6 +3,6 @@
 ```
 python -m venv venv
 
-source bin/activate
-pip install requirements.txt
+source venv/bin/activate
+pip install -r requirements.txt
 ```
