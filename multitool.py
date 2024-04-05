@@ -1,22 +1,22 @@
 from langchain_community.llms import Ollama
-from langchain.utilities import WikipediaAPIWrapper
-from langchain.utilities import PythonREPL
-from langchain.tools import DuckDuckGoSearchRun
+#from langchain.utilities import WikipediaAPIWrapper
+from langchain_community.utilities import WikipediaAPIWrapper
+from langchain_community.utilities import PythonREPL
+from langchain_community.tools import DuckDuckGoSearchRun
+from langchain.agents import Tool
+from langchain_openai import OpenAI
 
 wikipedia = WikipediaAPIWrapper()
-wikipedia.run('Langchain')
-
 python_repl = PythonREPL()
-python_repl.run("print(17*2)")
-
 search = DuckDuckGoSearchRun()
-search.run("Tesla stock price?")
 
-exit
+# wikipedia.run('Langchain')
+# python_repl.run("print(17*2)")
+# search.run("Tesla stock price?")
 
-from langchain.agents import Tool
 
-llm = Ollama(model="llama2")
+#llm = Ollama(model="llama2")
+llm = OpenAI(base_url="http://localhost:1234/v1", api_key="not-needed")
 
 tools = [
     Tool(
@@ -50,12 +50,10 @@ zero_shot_agent = initialize_agent(
     max_iterations=3,
 )
 
-zero_shot_agent.run("When was Barak Obama born?")
-zero_shot_agent.run("What is 17*6?")
-
-print(zero_shot_agent.agent.llm_chain.prompt.template)
-zero_shot_agent.run("Tell me about LangChain")
-zero_shot_agent.run("Tell me about Singapore")
+# print(zero_shot_agent.agent.llm_chain.prompt.template)
+#zero_shot_agent.run("When was Barak Obama born?")
+#zero_shot_agent.run("What is 17*6?")
 zero_shot_agent.run('what is the current price of btc')
-zero_shot_agent.run('Is 11 a prime number?')
-zero_shot_agent.run('Write a function to check if 11 a prime number and test it')
+# zero_shot_agent.run('Is 11 a prime number?')
+# zero_shot_agent.run('Write a function to check if 11 a prime number and test it')
+zero_shot_agent.run('what is the most profitable crypto currency this month?')
